@@ -28,7 +28,7 @@ node {
         }
      }
 
-    stage("Image Prune"){
+    stage("Image Prune/container"){
         imagePrune(CONTAINER_NAME)
     }
 
@@ -52,6 +52,8 @@ def imagePrune(containerName){
     try {
         sh "docker image prune -f"
         sh "docker stop $containerName"
+        sh "docker rm -f $containerName"
+        sh "docker system prune -f"
     } catch(error){}
 }
 
