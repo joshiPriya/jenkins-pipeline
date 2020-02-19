@@ -1,13 +1,13 @@
 FROM maven:3-alpine
 
-COPY pom.xml pipeline/
+COPY pom.xml application/
 
-COPY src/ pipeline/src/
+COPY src/ application/src/
 
-WORKDIR pipeline/
+WORKDIR application/
 
 RUN mvn clean install
 
 EXPOSE 8090
 
-ENTRYPOINT [ "java", "-jar", "/pipeline/target/jenkins-pipeline.jar"]
+ENTRYPOINT [ "java", "-jar", "/application/target/jenkins-pipeline.jar"]
